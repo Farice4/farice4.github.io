@@ -1,2 +1,2 @@
-https://blog.fabian4.cn
+https://farice4.github.io
 

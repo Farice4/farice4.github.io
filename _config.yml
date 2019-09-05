@@ -6,19 +6,17 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: Fabain4 
+title: Farice
 brief-intro: IT路上的潜行者
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://chenyb4.github.io" # the base hostname & protocol for your site
+url: "http://farice4.github.io" # the base hostname & protocol for your site
 
 permalink: /:year/:month/:day/:title/
 
 # other links
-twitter_username: faiban4
-github_username:  chenyb4
+github_username:  farice4
 email: cybing4@gmail.com
-zhihu_username: faiban4
-linkedIn_username: fabian4
+webchat: farice
 dribbble_username:
 
 description_footer: 本站记录技术上的经历与前进的方向!
