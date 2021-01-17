@@ -16,7 +16,7 @@ Farice ......
 
 ## 联系我
 
-* GitHub：[Farice](https://github.com/Farice4)
+* GitHub：[Farice4](https://github.com/Farice4/)
 * email：cybing4@gmail.com
 * webchat: Farice
 
