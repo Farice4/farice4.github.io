@@ -3,7 +3,7 @@ layout: post
 title: "AI 代码编程提升效率指南"
 date: 2026-03-09 11:30:00
 description: "分享使用 AI 工具提升编程效率的实践经验和技巧"
-category: "AI_Coding"
+categories: "AI_Coding"
 tags: [AI 编程，效率工具，开发实践]
 ---
 
