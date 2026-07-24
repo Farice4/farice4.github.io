@@ -5,58 +5,32 @@ permalink: /tag/
 icon: tags
 ---
 
-<div class="page clearfix">
-    <div class="left">
-        <h1>{{page.title}}</h1>
-        <hr>
-        {% capture tags %}
-          {% for tag in site.tags %}
-            {{ tag[0] }}
-          {% endfor %}
-        {% endcapture %}
-        {% assign sortedtags = tags | split:' ' | sort %}
+{% capture tags %}{% for tag in site.tags %}{{ tag[0] }} {% endfor %}{% endcapture %}
+{% assign sortedtags = tags | split:' ' | sort %}
 
-        <ul>
+<section class="content-index site-container">
+    <header class="page-hero glass-panel">
+        <span class="page-hero__eyebrow">KEYWORDS</span>
+        <h1>文章标签</h1>
+        <p>通过关键词发现跨分类内容。</p>
+    </header>
+
+    <nav class="tag-cloud glass-panel" aria-label="标签云">
+        {% for tag in sortedtags %}<a href="#{{ tag }}">#{{ tag }} <span>{{ site.tags[tag].size }}</span></a>{% endfor %}
+    </nav>
+
+    <div class="taxonomy-sections">
         {% for tag in sortedtags %}
-          <h2 id="{{ tag }}">{{ tag }}</h2>
-          {% for post in site.tags[tag] %}
-            <li>
-                <time>
-                {{ post.date | date:"%F" }} {{ post.date | date: "%a" }}.
-                </time>
-                <a class="title" href="{{ post.url }}">{{ post.title }}</a>
-
-                {% include category.html %}
-                {% include tag.html %}
-            </li>
-          {% endfor %}
+        <section class="taxonomy-section glass-panel">
+            <header><h2 id="{{ tag }}">#{{ tag }}</h2><span>{{ site.tags[tag].size }} 篇</span></header>
+            {% for post in site.tags[tag] %}
+            <article class="content-post-row">
+                <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
+                <a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+                <span>{{ post.categories | first }}</span>
+            </article>
+            {% endfor %}
+        </section>
         {% endfor %}
-        </ul>
-
     </div>
-    <button class="anchor"><i class="fa fa-anchor"></i></button>
-    <div class="right">
-        <div class="wrap">
-
-            <!-- Content -->
-            <div class="side content">
-                <div>
-                    Content
-                </div>
-                <ul id="content-side" class="content-ul">
-                    {% for tag in sortedtags %}
-                    <li>
-                        <a class="scroll" href="#{{ tag }}">
-                            {{ tag }} ({{ site.tags[tag].size }})
-                        </a>
-                    </li>
-                    {% endfor %}
-
-                </ul>
-            </div>
-            <!-- 其他div框放到这里 -->
-            <!-- <div class="side">bbbb</div> -->
-        </div>
-    </div>
-</div>
-<script src="{{ "/js/pageContent.js " | prepend: site.baseurl }}" charset="utf-8"></script>
+</section>

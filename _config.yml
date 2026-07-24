@@ -22,14 +22,22 @@ dribbble_username:
 description_footer: 本站记录技术上的经历与前进的方向!
 
 # comments
-# two ways to comment, only choose one, and use your own short name
-# 两种评论插件，选一个就好了，使用自己的 short_name
-# disqus 设置
-disqus:
-  shortname: fabian4
+comments:
+  provider: giscus
 
-#duoshuo_shortname: 
-#disqus_shortname: 
+giscus:
+  repo: Farice4/farice4.github.io
+  repo_id: "MDEwOlJlcG9zaXRvcnkxNDMxMTc1NzY="
+  category: General
+  category_id: "MDE4OkRpc2N1c3Npb25DYXRlZ29yeTMyMzY3MDY4"
+  mapping: pathname
+  strict: "1"
+  reactions_enabled: "1"
+  emit_metadata: "0"
+  input_position: top
+  theme: preferred_color_scheme
+  lang: zh-CN
+  loading: lazy
 
 # statistic analysis 统计代码
 # 百度统计 id，将统计代码替换为自己的百度统计id，即

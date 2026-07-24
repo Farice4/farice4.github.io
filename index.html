@@ -2,159 +2,90 @@
 layout: default
 ---
 
-<div class="page clearfix" index>
-    <div class="left">
-        <h1>Welcome to Fabian4's Blog!</h1>
-        <small>这里记录着我的IT技术学习之路</small>
-        <hr>
-        <ul>
+<div class="home-page site-container">
+    <section class="home-hero" aria-labelledby="home-title">
+        <span class="home-hero__eyebrow">ENGINEERING JOURNAL</span>
+        <h1 id="home-title">Ideas, systems and field notes.</h1>
+        <p>记录 AI 编程、云原生、基础设施与现代软件工程实践。</p>
+        <div class="home-hero__actions">
+            <a class="button button--light" href="{{ site.baseurl }}/archive/">浏览文章</a>
+            <a class="button button--ghost" href="{{ site.baseurl }}/about/">关于我</a>
+        </div>
+    </section>
+
+    <section aria-labelledby="latest-posts-title">
+        <div class="section-heading">
+            <div>
+                <span class="section-heading__eyebrow">LATEST WRITING</span>
+                <h2 id="latest-posts-title">最新文章</h2>
+            </div>
+            <a href="{{ site.baseurl }}/archive/">查看全部</a>
+        </div>
+
+        <div class="post-grid">
             {% for post in paginator.posts %}
-              <li>
-                <h2>
-                  <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
-                </h2>
-                <div class="label">
-                    <div class="label-card">
-                        <i class="fa fa-calendar"></i>{{ post.date | date: "%F" }}
-                    </div>
-                    <div class="label-card">
-                        {% if post.author %}<i class="fa fa-user"></i>{{ post.author }}
+                {% assign words = post.content | number_of_words %}
+                {% assign reading_time = words | divided_by: 300 | plus: 1 %}
+                {% assign card_modulo = forloop.index | modulo: 4 %}
+                <article class="post-card{% if forloop.first %} post-card--featured{% elsif card_modulo == 0 %} post-card--wide{% endif %}">
+                    <a class="post-card__link" href="{{ post.url | prepend: site.baseurl }}" aria-label="阅读 {{ post.title | escape }}"></a>
+                    <div class="post-card__content">
+                        <span class="post-card__category">{{ post.categories | first | default: "随笔" }}</span>
+                        <h3>{{ post.title }}</h3>
+                        <p>{{ post.excerpt | strip_html | strip_newlines | truncate: 132 }}</p>
+                        <div class="post-card__meta">
+                            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%Y.%m.%d" }}</time>
+                            <span>{{ reading_time }} 分钟阅读</span>
+                        </div>
+                        {% if post.tags.size > 0 %}
+                        <div class="post-card__tags" aria-label="文章标签">
+                            {% for tag in post.tags limit:3 %}<span>#{{ tag }}</span>{% endfor %}
+                        </div>
                         {% endif %}
                     </div>
-                    <div class="label-card">
-                        {% if page.meta %}<i class="fa fa-key"></i>{{ page.meta }}  {% endif %}
-                    </div>
-
-                    <div class="label-card">
-                    {% include category.html %}
-                    </div>
-
-                    <div class="label-card">
-                    {% include tag.html %}
-                    </div>
-                </div>
-                <div class="excerpt">
-                    {{post.excerpt}}
-                </div>
-                <div class="read-all">
-                    <a  href="{{ post.url | prepend: site.baseurl }}"><i class="fa fa-newspaper-o"></i>Read All</a>
-                </div>
-                <hr>
-              </li>
+                </article>
             {% endfor %}
-        </ul>
-
-
-
-        <!-- Pagination links -->
-        <div class="pagination">
-          {% if paginator.previous_page %}
-            <a href="/index.html" class="previous"><i class="fa fa-angle-double-left"></i></a>
-            <a href="{{ paginator.previous_page_path }}" class="previous"><i class="fa fa-angle-left"></i></a>
-          {% else %}
-            <span class="previous disable"><i class="fa fa-angle-double-left"></i></span>
-            <span class="previous disable"><i class="fa fa-angle-left"></i></span>
-          {% endif %}
-          <span class="page_number ">{{ paginator.page }}/{{ paginator.total_pages }}</span>
-          {% if paginator.next_page %}
-            <a href="{{ paginator.next_page_path }}" class="next"><i class="fa fa-angle-right"></i></a>
-            <a href="/page{{ paginator.total_pages }}" class="next"><i class="fa fa-angle-double-right"></i></a>
-          {% else %}
-            <span class="next disable"><i class="fa fa-angle-right"></i></span>
-            <span class="next disable"><i class="fa fa-angle-double-right"></i></span>
-          {% endif %}
         </div>
-    </div>
-    <!-- <button class="anchor"><i class="fa fa-anchor"></i></button> -->
-    <div class="right">
-        <div class="wrap">
-            <div class="side">
-                <div>
-                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-                    Recent Posts
-                </div>
-                <ul class="content-ul" recent>
-                    {% for post in site.posts offset: 0 limit: 10  %}
-                        <li><a href="{{ post.url }}">{{ post.title }}</a></li>
-                    {% endfor %}
-                </ul>
-            </div>
+    </section>
 
-            <!-- Content -->
-            <div class="side ">
-                <div>
-                    <i class="fa fa-th-list"></i>
-                    Categories
-                </div>
-                <ul class="content-ul" cate>
-                    {% for category in site.categories order:ascending %}
-                    <li>
-                        <a href="{{ root_url }}/{{ site.category_dir }}#{{ category | first }}" class="categories-list-item" cate="{{ category | first }}">
-                            <span class="name">
-                                {{ category | first }}
-                            </span>
-                            <span class="badge">{{ category | last | size }}</span>
-                        </a>
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
-            <!-- 其他div框放到这里 -->
-            <div class="side">
-                <div>
-                    <i class="fa fa-tags"></i>
-                    Tags
-                </div>
-                <div class="tags-cloud">
-                    {% assign first = site.tags.first %}
-                    {% assign max = first[1].size %}
-                    {% assign min = max %}
-                    {% for tag in site.tags offset:1 %}
-                      {% if tag[1].size > max %}
-                        {% assign max = tag[1].size %}
-                      {% elsif tag[1].size < min %}
-                        {% assign min = tag[1].size %}
-                      {% endif %}
-                    {% endfor %}
+    <nav class="pagination" aria-label="文章分页">
+        {% if paginator.previous_page %}
+        <a class="pagination__link" href="{{ paginator.previous_page_path | prepend: site.baseurl }}" rel="prev">上一页</a>
+        {% else %}
+        <span class="pagination__link is-disabled" aria-disabled="true">上一页</span>
+        {% endif %}
+        <span class="pagination__status">{{ paginator.page }} / {{ paginator.total_pages }}</span>
+        {% if paginator.next_page %}
+        <a class="pagination__link" href="{{ paginator.next_page_path | prepend: site.baseurl }}" rel="next">下一页</a>
+        {% else %}
+        <span class="pagination__link is-disabled" aria-disabled="true">下一页</span>
+        {% endif %}
+    </nav>
 
-                    {% if max == min %}
-                        {% assign diff = 1 %}
-                    {% else %}    
-                        {% assign diff = max | minus: min %}
-                    {% endif %}
-
-                    {% for tag in site.tags %}
-                      {% assign temp = tag[1].size | minus: min | times: 36 | divided_by: diff %}
-                      {% assign base = temp | divided_by: 4 %}
-                      {% assign remain = temp | modulo: 4 %}
-                      {% if remain == 0 %}
-                        {% assign size = base | plus: 9 %}
-                      {% elsif remain == 1 or remain == 2 %}
-                        {% assign size = base | plus: 9 | append: '.5' %}
-                      {% else %}
-                        {% assign size = base | plus: 10 %}
-                      {% endif %}
-                      {% if remain == 0 or remain == 1 %}
-                        {% assign color = 9 | minus: base %}
-                      {% else %}
-                        {% assign color = 8 | minus: base %}
-                      {% endif %}
-                      <a href="{{ root_url }}/{{ site.tag_dir }}#{{ tag[0] }}" style="font-size: {{ size }}pt; color: #{{ color }}{{ color }}{{ color }};">{{ tag[0] }}</a>
-                    {% endfor %}
-                </div>
-            </div>
-
-            <!-- <div class="side">
-                <div>
-                    <i class="fa fa-external-link"></i>
-                    Links
-                </div>
-                <ul  class="content-ul">
-
-                </ul>
-            </div> -->
+    <section class="topic-navigation glass-panel" aria-labelledby="topics-title">
+        <div>
+            <span class="section-heading__eyebrow">EXPLORE</span>
+            <h2 id="topics-title">按主题探索</h2>
+            <p>从分类、标签或时间线进入历史内容。</p>
         </div>
-    </div>
+        <div class="topic-navigation__groups">
+            <div>
+                <h3>分类</h3>
+                <div class="chip-list">
+                    {% for category in site.categories limit:8 %}
+                    <a href="{{ site.baseurl }}/category/#{{ category | first }}">{{ category | first }} <span>{{ category | last | size }}</span></a>
+                    {% endfor %}
+                </div>
+            </div>
+            <div>
+                <h3>标签</h3>
+                <div class="chip-list">
+                    {% for tag in site.tags limit:10 %}
+                    <a href="{{ site.baseurl }}/tag/#{{ tag | first }}">#{{ tag | first }}</a>
+                    {% endfor %}
+                </div>
+            </div>
+            <a class="topic-navigation__archive" href="{{ site.baseurl }}/archive/">查看完整归档 <i class="fa fa-arrow-right" aria-hidden="true"></i></a>
+        </div>
+    </section>
 </div>
-<!-- <script src="{{ "/js/scroll.min.js " | prepend: site.baseurl }}" charset="utf-8"></script> -->
-<!-- <script src="{{ "/js/pageContent.js " | prepend: site.baseurl }}" charset="utf-8"></script> -->

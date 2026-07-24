@@ -1,0 +1,128 @@
+.content-index {
+    padding-top: 10px;
+}
+
+.content-index__layout {
+    display: grid;
+    grid-template-columns: 160px minmax(0, 1fr);
+    gap: 24px;
+}
+
+.year-navigation {
+    position: sticky;
+    top: 104px;
+    align-self: start;
+    display: grid;
+    gap: 6px;
+    padding: 18px;
+    border-radius: var(--radius-md);
+}
+
+.year-navigation a {
+    padding: 5px 0;
+    color: var(--color-muted);
+    text-decoration: none;
+}
+
+.archive-timeline,
+.taxonomy-sections {
+    display: grid;
+    gap: 18px;
+}
+
+.archive-year,
+.taxonomy-section {
+    padding: clamp(22px, 4vw, 36px);
+    border-radius: var(--radius-md);
+}
+
+.archive-year h2,
+.taxonomy-section h2 {
+    margin: 0;
+    scroll-margin-top: 110px;
+    font-size: 1.7rem;
+}
+
+.archive-year__posts {
+    margin-top: 16px;
+}
+
+.content-post-row {
+    display: grid;
+    grid-template-columns: 92px minmax(0, 1fr) auto;
+    gap: 14px;
+    align-items: baseline;
+    padding: 12px 0;
+    border-top: 1px solid var(--color-border-subtle);
+}
+
+.content-post-row time,
+.content-post-row span {
+    color: var(--color-muted);
+    font-size: 0.78rem;
+}
+
+.content-post-row a {
+    color: var(--color-text);
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.taxonomy-overview,
+.tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 24px;
+    padding: 18px;
+    border-radius: var(--radius-md);
+}
+
+.taxonomy-overview a,
+.tag-cloud a {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    padding: 8px 12px;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 999px;
+    color: var(--color-text);
+    background: var(--color-surface-strong);
+    text-decoration: none;
+}
+
+.taxonomy-overview span,
+.tag-cloud span {
+    color: var(--color-muted);
+    font-size: 0.76rem;
+}
+
+.taxonomy-section header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 8px;
+}
+
+.taxonomy-section header > span {
+    color: var(--color-muted);
+    font-size: 0.82rem;
+}
+
+@media screen and (max-width: 760px) {
+    .content-index__layout {
+        grid-template-columns: 1fr;
+    }
+
+    .year-navigation {
+        position: static;
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .content-post-row {
+        grid-template-columns: 1fr;
+        gap: 3px;
+    }
+}

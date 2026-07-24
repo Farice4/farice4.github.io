@@ -1,0 +1,16 @@
+<script>
+(function() {
+    var storageKey = 'farice-theme';
+    var savedTheme = null;
+
+    try {
+        savedTheme = localStorage.getItem(storageKey);
+    } catch (error) {
+        savedTheme = null;
+    }
+
+    var systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : systemTheme;
+    document.documentElement.dataset.themeSource = savedTheme ? 'user' : 'system';
+}());
+</script>

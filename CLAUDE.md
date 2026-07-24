@@ -33,7 +33,7 @@ bundle exec jekyll build
 ├── _drafts/           # Unpublished posts
 ├── _sass/             # SCSS partials imported by main.scss
 ├── css/               # Compiled stylesheets
-├── js/                # JavaScript files (main.js, scroll.js, pageContent.js, etc.)
+├── js/                # Active JavaScript (theme, navigation, article, main)
 ├── page/              # Static pages (about, collections)
 ├── index.html         # Homepage with pagination and sidebar
 └── 404.md             # Custom 404 page
@@ -43,7 +43,7 @@ bundle exec jekyll build
 
 - **Theme**: Custom theme using kramdown markdown and Rouge syntax highlighting
 - **Pagination**: 6 posts per page using jekyll-paginate
-- **Comments**: Uses Disqus (shortname: fabian4)
+- **Comments**: Uses Giscus backed by GitHub Discussions
 - **URL**: http://farice4.github.io
 
 ### Post Front Matter
@@ -72,5 +72,12 @@ author: Author Name
 - `footer.html` - Site footer
 - `head.html` - HTML head with meta tags and stylesheets
 - `category.html` / `tag.html` - Display post categories and tags
-- `comments.html` - Disqus comments integration
+- `comments.html` - Giscus comments integration
+
+### Active JavaScript
+
+- `theme.js` - System-aware light/dark theme and Giscus synchronization
+- `navigation.js` - Accessible mobile navigation
+- `article.js` - Reading progress and table-of-contents enhancement
+- `main.js` - Global back-to-top behavior
 - `backToTop.html` - Back to top button

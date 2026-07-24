@@ -3,6 +3,7 @@ layout: page
 title: About
 permalink: /about/
 icon: heart
+description: 关于 Farice、技术经历与联系方式。
 ---
 
 * content
@@ -16,9 +17,11 @@ Farice ......
 
 ## 联系我
 
-* GitHub：[Farice4](https://github.com/Farice4/)
-* email：cybing4@gmail.com
-* webchat: Farice
+<div class="contact-links">
+  <a href="https://github.com/Farice4/"><strong>GitHub</strong><span>Farice4</span></a>
+  <a href="mailto:cybing4@gmail.com"><strong>Email</strong><span>cybing4@gmail.com</span></a>
+  <span><strong>WeChat</strong><span>Farice</span></span>
+</div>
 
 
 ## 工作技能

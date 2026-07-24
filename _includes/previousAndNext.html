@@ -1,13 +1,14 @@
-<div class="post-recent">
-    <div class="pre">
-        {% if page.previous %}
-        <p><strong>上一篇</strong> <a href="{{ page.previous.url | prepend: site.baseurl }}">{{ page.previous.title }}</a></p>
-        {% endif %}
-    </div>
-    <div class="nex">
-
-        {% if page.next %}
-        <p><strong>下一篇</strong> <a href="{{ page.next.url | prepend: site.baseurl }}">{{ page.next.title }}</a></p>
-        {% endif %}
-    </div>
-</div>
+<nav class="post-navigation" aria-label="相邻文章">
+    {% if page.previous %}
+    <a class="post-navigation__card glass-panel" href="{{ page.previous.url | prepend: site.baseurl }}" rel="prev">
+        <span>上一篇</span>
+        <strong>{{ page.previous.title }}</strong>
+    </a>
+    {% else %}<span></span>{% endif %}
+    {% if page.next %}
+    <a class="post-navigation__card post-navigation__card--next glass-panel" href="{{ page.next.url | prepend: site.baseurl }}" rel="next">
+        <span>下一篇</span>
+        <strong>{{ page.next.title }}</strong>
+    </a>
+    {% endif %}
+</nav>

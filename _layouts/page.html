@@ -2,27 +2,27 @@
 layout: default
 ---
 
-<div class="page clearfix" post>
-    <div class="left">
-        <h1>{{page.title}}</h1>
-        <hr>
-        {{content}}
-    </div>
-    <button class="anchor"><i class="fa fa-anchor"></i></button>
-    <div class="right">
-        <div class="wrap">
+<article class="page-shell site-container">
+    <header class="page-hero glass-panel">
+        <span class="page-hero__eyebrow">{{ page.title | upcase }}</span>
+        <h1>{{ page.title }}</h1>
+        {% if page.description %}<p>{{ page.description }}</p>{% endif %}
+    </header>
 
-            <!-- Content -->
-            <div class="side content">
-                <div>
-                    Content
-                </div>
-                <ul id="content-side" class="content-ul">
-                </ul>
+    <details class="page-toc page-toc--mobile glass-panel">
+        <summary>页面目录</summary>
+        <nav class="page-toc__content" aria-label="移动端页面目录"></nav>
+    </details>
+
+    <div class="page-layout">
+        <aside class="page-toc page-toc--desktop">
+            <div class="page-toc__panel glass-panel">
+                <strong>页面目录</strong>
+                <nav class="page-toc__content" aria-label="页面目录"></nav>
             </div>
-            <!-- 其他div框放到这里 -->
-            <!-- <div class="side">bbbb</div> -->
+        </aside>
+        <div id="page-content" class="page-content glass-panel">
+            {{ content }}
         </div>
     </div>
-</div>
-<script src="{{ "/js/pageContent.js " | prepend: site.baseurl }}" charset="utf-8"></script>
+</article>

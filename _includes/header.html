@@ -1,34 +1,25 @@
-<header id="top">
-    <div class="wrapper">
-        <a href="{{ site.baseurl }}/" class="brand">{{ site.title }}</a>
-        <small>{{site.brief-intro}}</small>
-        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
-        <nav id="headerNav">
-            <ul>
-                <li>
-                    {% if page.url == '/' %}
-                    <a class="active" href="{{site.baseurl}}/">
-                        {% else %}
-                    <a href="{{site.baseurl}}/">
-                    {% endif %}
-                        <i class="fa fa-home"></i>Home
-                    </a>
-                </li>
+<header id="top" class="site-header glass-panel">
+    <div class="site-header__inner site-container">
+        <a class="site-brand" href="{{ site.baseurl }}/" aria-label="{{ site.title }} 首页">
+            <span class="site-brand__name">{{ site.title }}</span>
+            <span class="site-brand__tagline">{{ site.brief-intro }}</span>
+        </a>
 
-                {% for my_page in site.pages %}
-                    {% if my_page.title %}
-                    <li>
-                        {% if my_page.url == page.url %}
-                        <a class="active" href="{{ my_page.url | prepend: site.baseurl }}">
-                            {% else %}
-                        <a href="{{ my_page.url | prepend: site.baseurl }}">
-                        {% endif %}
-                            <i class="fa fa-{{my_page.icon}}"></i>{{ my_page.title }}
-                        </a>
-                    </li>
-                    {% endif %}
-                {% endfor %}
-            </ul>
+        <div class="site-header__actions">
+            <button id="theme-toggle" class="icon-button theme-toggle" type="button" aria-label="切换深色模式" aria-pressed="false">
+                <i class="fa fa-adjust" aria-hidden="true"></i>
+            </button>
+            <button id="nav-toggle" class="icon-button nav-toggle" type="button" aria-label="打开导航菜单" aria-controls="site-nav" aria-expanded="false">
+                <i class="fa fa-bars" aria-hidden="true"></i>
+            </button>
+        </div>
+
+        <nav id="site-nav" class="site-nav" aria-label="主要导航">
+            <a{% if page.url == '/' %} class="is-active" aria-current="page"{% endif %} href="{{ site.baseurl }}/">首页</a>
+            <a{% if page.url == '/archive/' %} class="is-active" aria-current="page"{% endif %} href="{{ site.baseurl }}/archive/">归档</a>
+            <a{% if page.url == '/category/' %} class="is-active" aria-current="page"{% endif %} href="{{ site.baseurl }}/category/">分类</a>
+            <a{% if page.url == '/tag/' %} class="is-active" aria-current="page"{% endif %} href="{{ site.baseurl }}/tag/">标签</a>
+            <a{% if page.url == '/about/' %} class="is-active" aria-current="page"{% endif %} href="{{ site.baseurl }}/about/">关于</a>
         </nav>
     </div>
 </header>
